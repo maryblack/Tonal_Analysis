@@ -4,7 +4,10 @@ from src.etl.preprocess import tokenize
 
 
 def tonality(phrase: str) -> str:
-    model = pickle.load(open(Filenames.MODEL, 'rb'))
-    vectorizer = pickle.load(open(Filenames.VECTORIZER, 'rb'))
+    with open("./model/tonality.dat", 'rb') as fm:
+        model = pickle.load(fm)
+
+    with open("./model/vectorizer.pk", 'rb') as fv:
+        vectorizer = pickle.load(fv)
 
     return model.predict(vectorizer.transform([' '.join(tokenize(phrase))]).toarray())

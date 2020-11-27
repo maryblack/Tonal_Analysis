@@ -30,8 +30,12 @@ def main():
     logging.info(model.score(X_test, y_test))
 
     logging.info("Save model and vectorizer")
-    pickle.dump(model, open(Filenames.MODEL, 'wb'))
-    pickle.dump(vectorizer, open(Filenames.VECTORIZER, 'wb'))
+
+    with open(Filenames.MODEL, 'wb') as fm:
+        pickle.dump(model, fm)
+
+    with open(Filenames.VECTORIZER, 'wb') as fv:
+        pickle.dump(vectorizer, fv)
 
 if __name__ == '__main__':
     main()
