@@ -5,3 +5,4 @@ pymorphy2-dicts-ru==2.4.417127.4579844
 nltk==3.4.4
 numpy==1.18.5
 PyYAML==5.3.1
+coverage==5.3
