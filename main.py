@@ -29,9 +29,9 @@ def main():
     model.fit(X_train, y_train)
     logging.info(model.score(X_test, y_test))
 
-    logging.info("Save model")
+    logging.info("Save model and vectorizer")
     pickle.dump(model, open(Filenames.MODEL, 'wb'))
-
+    pickle.dump(vectorizer, open(Filenames.VECTORIZER, 'wb'))
 
 if __name__ == '__main__':
     main()
