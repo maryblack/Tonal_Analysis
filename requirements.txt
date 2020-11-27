@@ -1,2 +1,7 @@
 Flask==1.1.2
 scikit-learn==0.23.2
+pymorphy2==0.9.1
+pymorphy2-dicts-ru==2.4.417127.4579844
+nltk==3.4.4
+numpy==1.18.5
+PyYAML==5.3.1
