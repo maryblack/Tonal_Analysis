@@ -4,6 +4,7 @@ from nltk.corpus import stopwords
 import string
 import pymorphy2
 import re
+from src.config import Parameters
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 
@@ -28,13 +29,16 @@ def tokenize(file_text, remove_words=False):
     tokens = nltk.word_tokenize(file_text)
     tokens = [i for i in tokens if (i not in string.punctuation)]
     stop_words = stopwords.words('russian')
+
     if remove_words:
-        words_to_remove = ['все', 'нет', 'ни', 'ничего', 'без', 'никогда', 'наконец', 'больше', 'хорошо', 'лучше',
-                           'нельзя', 'более', 'всегда', 'конечно', 'всю', 'такой', 'впрочем', 'так', 'вот', 'можно',
-                           'даже', 'разве']
-        for word in words_to_remove:
+        for word in Parameters.WORDS_TO_REMOVE:
             stop_words.remove(word)
-    tokens = [morph.parse(re.sub(r'[^\w\s]', '', i).lower())[0].normal_form for i in tokens if (i not in stop_words)]
+
+    tokens = [
+        morph
+        .parse(re.sub(r'[^\w\s]', '', i).lower())[0]
+        .normal_form for i in tokens if (i not in stop_words)
+    ]
     tokens = [i.replace("«", "").replace("»", "") for i in tokens]
     for item in tokens:
         if '' == item or item.isspace():

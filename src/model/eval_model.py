@@ -10,4 +10,8 @@ def tonality(phrase: str) -> str:
     with open(Filenames.VECTORIZER, 'rb') as fv:
         vectorizer = pickle.load(fv)
 
-    return model.predict(vectorizer.transform([' '.join(tokenize(phrase))]).toarray())
+    return model.predict(
+        vectorizer
+        .transform([' '.join(tokenize(phrase))])
+        .toarray()
+    )
