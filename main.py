@@ -19,12 +19,12 @@ def main():
     citations_test = parse_xml(Filenames.TEST)
 
     logging.info("Vectorize data")
-    X_train, y_train, X_test, y_test, vectorizer = vectorized_corpus(citations_train, citations_test)
+    X_train, y_train, X_test, y_test, vectorizer = vectorized_corpus(
+        citations_train, citations_test
+    )
 
     logging.info("Train model")
-    model = LogisticRegression(C=1.0, class_weight='balanced', dual=False, fit_intercept=True, tol=0.0001,
-                               intercept_scaling=1, max_iter=100, penalty='l2', random_state=0, solver='saga',
-                               multi_class='ovr', warm_start=True)
+    model = LogisticRegression()
 
     model.fit(X_train, y_train)
     logging.info(model.score(X_test, y_test))
@@ -36,6 +36,7 @@ def main():
 
     with open(Filenames.VECTORIZER, 'wb') as fv:
         pickle.dump(vectorizer, fv)
+
 
 if __name__ == '__main__':
     main()
